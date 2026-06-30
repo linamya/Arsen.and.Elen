@@ -2,48 +2,64 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Приглашение на Никах</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">    <title>Приглашение на Никах</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         /* ИСПРАВЛЕНО: Теперь имя файла точь-в-точь как у вас */
         @font-face {
-            font-family: 'Bickham Script Pro';
-            src: url('BickhamScriptPro.ttf') format('truetype'); 
+            font-family: 'Majestic';
+            src: url('Majestic.ttf') format('truetype'); 
             font-weight: normal;
             font-style: normal;
         }
 
-        html, body {
-    height: 100%;
+    /* 1. Возвращаем базовую сетку на весь экран смартфона */
+html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    background-color: #333333; /* Темный фон для областей вне телефона (по бокам) */
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden !important; /* Обрезает все хвосты картинок справа */
 }
-        /* Мобильный контейнер */
-        .mobile-container {
-            position: relative;
-            width: 100%;
-            max-width: 450px; 
-            height: 100vh;    
-            margin: 0 auto;   
-            
-            /* Фон-гифка */
-            background-image: url('background.gif'); 
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover; 
-            
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5); 
-        }
+
+/* 2. Базовые правила body (фон задаём один раз, ниже в едином блоке) */
+body {
+    overflow-x: hidden !important;
+}
+
+/* 3. Ваш мобильный контейнер (оставляем как у вас, но проверяем центрирование) */
+.mobile-container {
+    position: relative;
+    width: 100%;
+    max-width: 450px; 
+    margin: 0 auto !important; /* Выравнивает всю бумагу и текст строго по центру */
+    background: transparent !important; 
+    box-shadow: 0 0 30px rgba(0,0,0,0.5); 
+    overflow: hidden !important; /* Срезает вылезающие бока цветов внутри контейнера */
+}
+          /* Первый экран с гифкой */
+.hero-content {
+    width: 100%;
+    height: 100vh; /* Ровно на весь экран телефона */
+    
+    /* Возвращаем вашу гифку сюда */
+    background-image: url('background.gif') !important; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    
+    /* Центрируем имена и дату внутри */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    position: relative;
+    z-index: 2;
+}
 
         /* Полупрозрачная вуаль поверх гифки */
         .overlay {
@@ -52,7 +68,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(245, 235, 230, 0.25); 
+            background: transparent !important;
+
             z-index: 1;
         }
 
@@ -66,13 +83,13 @@
 
         /* 1. НАДПИСЬ "Nikkah Day" */
         .subtitle {
-            font-family: 'Bickham Script Pro', cursive;
+            font-family: 'Majestic', cursive;
             font-size: 2rem;
             color: #5c4a3c;
             position: relative; /* Режим независимого движения */
             
             /* МЕНЯЙТЕ ТУТ: */
-            top: 20px; /* Положительное число (например, 15px) опустит только эту надпись вниз. Отрицательное (например, -15px) — поднимет вверх */
+            top: -20px; /* Положительное число (например, 15px) опустит только эту надпись вниз. Отрицательное (например, -15px) — поднимет вверх */
             
             margin-bottom: 5px; /* Минимальный базовый отступ */
         }
@@ -86,14 +103,14 @@
             position: relative; /* Режим независимого движения */
             
             /* МЕНЯЙТЕ ТУТ: */
-            top: -20px; /* Поставьте -15px или -20px, чтобы поднять дату прямо к Nikkah Day, не сдвигая имена ниже! */
+            top: -30px; /* Поставьте -15px или -20px, чтобы поднять дату прямо к Nikkah Day, не сдвигая имена ниже! */
             
             margin-bottom: 25px; /* Базовый отступ до имен */
         }
 
         /* Общая оболочка для имен (выстраивает их по центру) */
         .wedding-names {
-            font-family: 'Bickham Script Pro', cursive;
+            font-family: 'Majestic', cursive;
             color: #4a3b2c;
             font-weight: 400;
             display: flex;
@@ -107,17 +124,17 @@
             position: relative;
             
             /* МЕНЯЙТЕ ТУТ: */
-            top: 60px; /* Двигает только первое имя вверх или вниз */
+            top: 140px; /* Двигает только первое имя вверх или вниз */
         }
 
         /* 4. ЗНАЧОК АМПЕРСАНДА (&) */
         .ampersand {
-            font-size: 4.2rem;
-            color: #7d6652;
+            font-size: 3rem;
+            color: #4a3b2c;
             position: relative;
             
             /* МЕНЯЙТЕ ТУТ: */
-            top: -40px; /* Двигает только значок & */
+            top: 5px; /* Двигает только значок & */
         }
 
         /* 5. ВТОРОЕ ИМЯ (Khalil) */
@@ -140,10 +157,10 @@
         }
 
         .scroll-down span {
-            font-family: 'Bickham Script Pro', cursive;
-            font-size: 2.3rem;
+            font-family: 'Majestic', cursive;
+            font-size: 2rem;
             color: #5c4a3c;
-            margin-bottom: -20px;
+            margin-bottom: 40px;
         }
 
         .scroll-down .arrow {
@@ -168,10 +185,7 @@
     max-width: 450px;
     min-height: 100vh;
     margin: 0 auto;
-    background-image: linear-gradient(rgba(245, 235, 230, 0.4), rgba(245, 235, 230, 0.4)), url('fon2.jpg'); 
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background-size: transparent;
     
     /* --- ИЗМЕНЯЕМ ТУТ --- */
     /* Первое число (отступ сверху) ставим 0px, чтобы бумага могла прижаться к краю */
@@ -184,12 +198,10 @@
 } /* <- это закрылась какая-то предыдущая настройка */
     
 /* --- ТО ЖЕ САМОЕ ПОКРЫТИЕ ДЛЯ БЛОКА С ТАЙМЕРОМ --- */
-.countdown-block { /* ТУТ ОБЯЗАТЕЛЬНО ДОЛЖНО БЫТЬ ИМЯ БЛОКА И ОТКРЫВАЮЩАЯ СКОБКА */
-    background-image: linear-gradient(rgba(177, 159, 119, 0.4), rgba(245, 235, 230, 0.4)), url('fon2.jpg');
-    background-repeat: no-repeat;
+.countdown-block { /* ТУТ ОБЯЗАТЕЛЬНО ДОЛЖНО БЫТЬ ИМЯ БЛОКА И ОТКРЫВАЮЩАЯ СКОБКА */    background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    
+    background: transparent;
     padding: 100px 20px 60px 20px;
     display: flex;
     flex-direction: column;
@@ -226,9 +238,9 @@
             font-weight: 300;
         }
 
-        /* Заголовок "The Celebration Begins In" */
+        /* Заголовок "До свадьбы" */
       .countdown-title {
-    font-family: 'Bickham Script Pro', cursive;
+    font-family: 'Majestic', cursive;
     font-size: 3rem;
     color: #4a3b2c;
     font-weight: 400;
@@ -236,21 +248,21 @@
 
     /* --- ДВИГАЕМ ЗАГОЛОВОК --- */
     position: relative;
-    top: 0px; /* Меняйте здесь, чтобы подвинуть надпись независимо от цифр */
+    top: -160px; /* Меняйте здесь, чтобы подвинуть надпись независимо от цифр */
 }
 
         /* Контейнер для цифр */
         .timer-container {
-    display: flex;
-    justify-content: center;
+    display: flex !important;
+    justify-content: center !important;
     align-items: flex-start;
     width: 100%;
     max-width: 360px;
     position: relative;
-    top: 0px;
+    top: -360px;
 
     /* --- МАГИЯ ВЫРАВНИВАНИЯ ПО ЦЕНТРУ --- */
-    margin: 0 auto; /* Автоматически сделает одинаковые отступы слева и справа, центрируя таймер */
+    margin: 0 auto !important; /* Автоматически сделает одинаковые отступы слева и справа, центрируя таймер */
 }
 
         .timer-item {
@@ -274,7 +286,7 @@
         .timer-label {
             font-family: 'Playfair Display', serif;
             font-size: 0.85rem;
-            color: #a38a75;
+            color: #4a3b2c;
             text-transform: capitalize;
             font-weight: 300;
         }
@@ -283,81 +295,236 @@
         .timer-separator {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            color: #a38a75;
+            color: #4a3b2c;
             line-height: 1;
             margin: 0 5px;
             font-weight: 300;
         }
 /* --- ПОДЛОЖКА-БУМАГА НА ВСЮ ШИРИНУ С РУЧНОЙ ВЫСОТОЙ --- */
+/* Новые ровные стили для блока с бумагой */
 .quote-paper-card {
     background-image: url('dly2bloka2.png'); 
-    background-size: 100% 100%; 
+    background-size: contain; 
     background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
+    background-position: center top;
+    width: 100% !important;
     max-width: 450px; 
-    margin: 0 auto;
+    margin: 0 auto !important;
     padding-top: 40px;    
     padding-bottom: 200px; 
-    padding-left: 20px;
-    padding-right: 20px;
-    box-sizing: border-box; 
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    box-sizing: border-box !important; 
     position: relative;
     top: -100px;
+    
+    /* Центрируем текст внутри */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
 }
 
-/* Стили самого текста внутри бумаги */
-.quote-paper-card .quote-text {
-    width: 100%; 
-    text-align: center; 
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    margin: 0 auto;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #5c4a3c;
-    position: relative;
-    top: 100px; 
-}
-/* Родителю (контейнеру) обязательно задаем relative, чтобы цветы позиционировались относительно него */
+/* Выравниваем обертку таймера и заголовок */
 .countdown-block {
     position: relative;
-    /* ... остальные ваши стили (.countdown-block) ... */
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
 }
 
-/* --- СТИЛИ ДЛЯ ЦВЕТОВ НА СТЫКЕ --- */
+.countdown-title {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 20px auto !important;
+}
 .flowers-divider {
     position: absolute;
-    
-    /* 1. Центрируем картинку по горизонтали */
     left: 50%;
     transform: translateX(-50%);
     
-    /* 2. Ширина: задайте нужный размер, например, на 90% или 100% ширины экрана */
-    width: 100%; 
-    max-width: 450px; /* Чтобы не растягивалось больше мобильного экрана */
+    /* Меняем явные 100% на безопасный подсчет ширины */
+    width: 100vw; 
+    max-width: 450px; 
+    height: auto; 
+    top: -175px; 
+    z-index: 10; 
+    pointer-events: none; 
     
-    /* 3. Высота подстраивается автоматически */
+    /* ДОБАВЛЯЕМ ЭТУ СТРОЧКУ: */
+    contain: layout paint; /* Изолирует элемент, чтобы он физически не мог влиять на размер всего сайта */
+}
+/* Контейнер нового блока */
+.scrolling-layer-block {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    height: 70vh; 
+    margin: 0 auto;
+
+    /* МЕНЯЕМ НА VISIBLE (разрешаем элементам вылезать наружу) */
+    overflow: visible; 
+
+    z-index: 10; 
+}
+/* Слой 1: Нижнее фото */
+.scroll-bg-photo {
+    position: absolute;
+    
+    /* 1. Выравниваем строго по центру экрана */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* 2. РАЗМЕР ФОТО: увеличивайте этот процент, чтобы сделать фото крупнее */
+    width: 100%; 
     height: auto; 
     
-    /* 4. ПОЗИЦИЯ ПО ВЕРТИКАЛИ (Управление высотой) */
-    /* top: 0 поместит цветы в самый верх блока .countdown-block (на стык с предыдущим экраном) */
-    top: -175px; 
-    
-    /* РЕГУЛИРОВКА: Если нужно приподнять цветы чуть выше на предыдущий блок, 
-       используйте отрицательное значение, например: top: -40px; */
+    /* 3. ПЕРЕМЕЩЕНИЕ НА СТЫК БЛОКОВ (ВВЕРХ И ВНИЗ) */
+    /* Минус (например, -100px) заставит фото подняться ВВЕРХ и залезть на блок с таймером.
+       Чем больше минус, тем выше поднимется фото. 
+       Если нужно опустить — уменьшайте минус (например, -50px) */
+    top: -300px; 
 
-    /* 5. Слои: поднимаем картинку выше фона и выше бумаги */
-    z-index: 10; 
+    /* 4. САМЫЙ ВАЖНЫЙ МОМЕНТ */
+    /* Ставим высокий z-index, чтобы фото гарантированно легло ПОВЕРХ фона 
+       и верхнего, и нижнего блоков */
+    z-index: 5; 
+}
+
+/* GIF-анимация должна быть поверх фото */
+.scroll-gif {
+    position: absolute;
     
-    /* Отключаем возможность случайно перетащить картинку пальцем на смартфонах */
+    /* 1. Центрируем GIF точно по центру экрана */
+    top: 88%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* 2. РАЗМЕР ГИФКИ (Управление масштабом) */
+    /* Увеличьте этот процент, чтобы сделать GIF крупнее (например, 85%, 90% или даже 100%), 
+       или уменьшите (например, до 50%), если он слишком большой */
+    width: 94%; 
+    height: auto; /* Высота подстроится сама, чтобы GIF не сжимался */
+    
+    /* 3. ВЫВОДИМ НА ПЕРЕДНИЙ ПЛАН ПОВЕРХ ФОТО */
+    /* Так как у фото стоит z-index: 5, у гифки он должен быть СТРОГО выше! */
+    z-index: 6; 
+    
+    /* Отключаем случайные нажатия/выделения на смартфонах */
     pointer-events: none; 
+}
+.scroll-moving-img {
+    position: absolute;
+    left: 50%;
+    top: -10%; 
+    width: 10%; 
+    height: auto;
+    
+    /* НАМЕРТВО ФИКСИРУЕМ НА ПЕРЕДНЕМ ПЛАНЕ */
+    z-index: 9999 !important; 
+    
+    /* Плавность скролла */
+    transition: transform 0.05s ease-out; 
+    pointer-events: none;
+}
+/* Единственное место, где задаётся неподвижный фон страницы */
+body {
+    width: 100%;
+    max-width: 450px;          /* Сайт не шире "мобильного" макета */
+    margin: 0 auto !important; /* Центрирование самого body на широких экранах */
+    overflow-x: hidden;
+
+    background-image: url('fon2.jpg') !important;
+    background-repeat: no-repeat !important;
+    background-position: center top !important;
+    background-attachment: fixed !important; /* фон неподвижен при скролле */
+    background-size: cover !important;
+}
+
+/* Это сделает главный контейнер прозрачным и уберет белый бок */
+.mobile-container {
+    max-width: 450px;          /* Задаем контейнеру рамки */
+    margin: 0 auto;
+    background: transparent !important;
+    background-image: none !important;
+    
+    /* КРИТИЧЕСКИ ВАЖНО: обрезаем торчащую справа картинку */
+    overflow: hidden !important; 
+}
+/* Временный тест отключен (был: outline: 1px solid red на всех элементах) */
+/* 1. Центрируем бумагу, текст и всё, что внутри карточки */
+.quote-paper-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;   /* Центрирует внутренние элементы по горизонтали */
+    text-align: center !important;    /* Центрирует сам текст */
+}
+
+/* 2. Центрируем заголовок таймера */
+.quote-paper-card h2, 
+.quote-paper-card p,
+.quote-paper-card div {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 3. Проверяем блок таймера (если фраза "До свадьбы осталось" находится в нём или под ним) */
+/* Замените .countdown-block на реальный класс вашего таймера, если он называется иначе */
+.countdown-block {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+/* --- СУПЕР-ЦЕНТРИРОВАНИЕ ДЛЯ ВСЕХ ПОСЛЕДУЮЩИХ БЛОКОВ --- */
+
+/* Нацеливаемся на блок бумаги и заставляем всё внутри него встать по центру */
+.quote-paper-card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important; /* Выравнивание строго по центральной оси */
+    text-align: center !important;
+}
+
+/* Находим ВСЕ элементы внутри бумаги: абзацы, заголовки, списки */
+.quote-paper-card * {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;  /* Сбрасываем возможные скрытые левые отступы */
+    padding-right: 0 !important; /* Сбрасываем правые отступы */
+    left: 0 !important;          /* Если где-то было position: relative и left */
+    right: 0 !important;
+}
+
+/* Отдельно фиксируем текст внутри красных рамок, которые мы видели */
+.quote-paper-card p, 
+.quote-paper-card h2,
+#countdown /* или какой ID/класс у вашего таймера */ {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+/* Если фраза "До свадьбы осталось" — это отдельный заголовок ниже */
+h2 {
+    text-align: center !important;
+    width: 100% !important;
+    margin: 20px auto !important;
 }
 </style>
 </head>
 <body>
+    
 
     <div class="mobile-container">
         <div class="overlay"></div>
@@ -372,53 +539,89 @@
                 <span class="last-name">Arsen</span>
             </div>
         </div>
-        
-        <div class="scroll-down">
-            <span>Scroll-down</span>
-            <div class="arrow"></div>
-        </div>
     </div>
-</div> 
 
  <div class="countdown-block">
 
     <div class="quote-paper-card">
         <p class="quote-text">
-            Two souls, one destiny, written by Allah. Join us for the Nikkah celebration of Aria and Khalil.
-        </p>
-    </div>
+            Совсем скоро состоится важное для нас событие - наша свадьба. В этот день мы хотим оказаться в окружении самых близких и дорогих для нас людей.
+        </p> </div>
 
     <img src="flower.png" class="flowers-divider" alt="Flowers Decor">
 
-    <h2 class="countdown-title">The Celebration Begins In</h2>
-    <div class="timer-container">...</div>
-
-</div>
-    <h2 class="countdown-title">The Celebration Begins In</h2>
+    <h2 class="countdown-title">До свадьбы осталось</h2>
 
     <div class="timer-container">
         <div class="timer-item">
             <span class="timer-number" id="days">86</span>
-            <span class="timer-label">Days</span>
+            <span class="timer-label">Дней</span>
         </div>
         <div class="timer-separator">:</div>
         <div class="timer-item">
             <span class="timer-number" id="hours">08</span>
-            <span class="timer-label">Hours</span>
+            <span class="timer-label">Часов</span>
         </div>
         <div class="timer-separator">:</div>
         <div class="timer-item">
             <span class="timer-number" id="minutes">19</span>
-            <span class="timer-label">Minutes</span>
+            <span class="timer-label">Минут</span>
         </div>
         <div class="timer-separator">:</div>
         <div class="timer-item">
             <span class="timer-number" id="seconds">10</span>
-            <span class="timer-label">Seconds</span>
+            <span class="timer-label">Секунд</span>
         </div>
     </div>
 
 </div>
+
+<div class="scrolling-layer-block">
+    
+    <img src="time.png" class="scroll-bg-photo" alt="Background">
+    
+    <img src="go2.gif" class="scroll-gif" alt="GIF Animation">
+
+    <img src="rosa.png" class="scroll-moving-img" id="parallax-img" alt="Moving Element">
+
+</div>
+<script>
+window.addEventListener('scroll', function() {
+    const block = document.querySelector('.scrolling-layer-block');
+    const movingImg = document.getElementById('parallax-img');
+    
+    if (!block || !movingImg) return;
+
+    const blockRect = block.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Проверяем, зашел ли блок на экран
+    if (blockRect.top < windowHeight && blockRect.bottom > 0) {
+        // Вычисляем, насколько пикселей пользователь прокрутил страницу внутри этого блока
+        const scrolled = windowHeight - blockRect.top;
+        
+        /* ========================================================
+           НАСТРОЙКА НАШИХ ШАГОВ (в пикселях):
+           Вы можете менять эти цифры, подстраивая под свой дизайн.
+           ======================================================== */
+        const step1 = 40;  // Первый шажок (слегка сдвинулся)
+        const step2 = 220; // Второй шажок (опустился ниже)
+        const step3 = 440; // Третий шаг — ТОЧКА ОСТАНОВКИ. Дальше картинка не пойдет.
+        
+        // Плавная скорость движения к этим шагам
+        let moveDown = scrolled * 0.3; 
+
+        // Логика фиксации на третьем шаге:
+        if (moveDown > step3) {
+            moveDown = step3; // Если скроллим дальше, картинка жестко застывает на шаге 3
+        }
+
+        // Применяем движение к картинке (и держим её на самом верхнем слое)
+        movingImg.style.transform = `translate(-50%, ${moveDown}px)`;
+        movingImg.style.zIndex = "9999";
+    }
+});
+</script>
 </body>
 <script>
         // Укажите дату вашего события (Год, Месяц - 1, День, Часы, Минуты)
@@ -450,4 +653,4 @@
         setInterval(updateCountdown, 1000);
         updateCountdown(); // И один раз при загрузке
     </script>
-</html>супе
+</html>
